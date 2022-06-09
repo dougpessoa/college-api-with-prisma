@@ -1,4 +1,4 @@
 # College Rest API - Learning Prisma Basics
 
-Below the database model 
+Below you can see the database model 
 ![model](assets/model.png)
