@@ -8,23 +8,36 @@ datasource db {
 }
 
 model Students {
-  id String @id @default(uuid())
-  name String 
-  email String @unique 
-  password String 
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@map("students")
+  TaskOvertime TaskOvertime[]
+}
+
+model TaskOvertime {
+  id         String   @id @default(uuid())
+  name       String
+  duration   Int
+  created_at DateTime @default(now())
+
+  fk_id_student String
+  students      Students @relation(fields: [fk_id_student], references: [id])
+
+  @@map("task_overtime")
 }
 
 model Courses {
-  id String @id @default(uuid())
-  name String 
-  duration Int 
+  id          String   @id @default(uuid())
+  name        String
+  duration    Int
   description String
-    created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
   @@map("courses")
 }
