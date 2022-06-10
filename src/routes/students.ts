@@ -11,6 +11,15 @@ studentsRouter.get('/', async (request, response) => {
   return response.json(result)
 })
 
+studentsRouter.get('/details/:id', async (request, response) => {
+  const {id} = request.params
+  const student = new Students()
+
+  const result = await student.showAllDetails(id)
+
+  return response.json(result)
+})
+
 studentsRouter.post('/', async (request, response) => {
   const data = request.body 
   

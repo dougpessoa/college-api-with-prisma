@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { hash } from 'bcryptjs';
 import appError from '../error/appError';
 
 const prisma = new PrismaClient()

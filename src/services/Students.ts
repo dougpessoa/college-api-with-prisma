@@ -106,6 +106,36 @@ class Students {
       message: 'Student has been deleted!'
     }
   }
+
+  async showAllDetails(id: string): Promise<any> {
+    const student = await prisma.students.findUnique({
+      where: {
+        id 
+      },
+      select: {
+        password: false,
+        name: true, 
+        id: true,
+        email: true,
+        TaskOvertime: {
+          select: {
+            duration: true
+          }
+        }
+      }
+    })
+
+    const result = {
+      ...student, 
+      time_overtime: student?.TaskOvertime.reduce(
+        (prev, current) => prev + current.duration, 0
+      )
+    }
+
+    delete result.TaskOvertime
+
+    return result
+  }
 }
 
 export { Students }
